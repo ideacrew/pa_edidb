@@ -53,6 +53,10 @@ policy_ids_to_keep = kept_policies.map(&:id)
 puts "Found #{policy_ids_to_keep.length} policies to keep."
 puts "Found #{kept_person_ids.length} people to keep."
 
+kept_person_ids.each do |kept_person_id|
+  PersonScrubber.scrub(kept_person_id)
+end
+
 transmissions_to_keep = Protocols::X12::TransactionSetHeader.where({
   :policy_id => {
     "$in" => policy_ids_to_keep
