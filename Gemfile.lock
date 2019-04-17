@@ -161,6 +161,7 @@ GEM
       railties (>= 3.0.0)
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
+    forgery (0.7.0)
     forkr (1.0.2)
     gyoku (1.1.1)
       builder (>= 2.1.2)
@@ -422,6 +423,7 @@ DEPENDENCIES
   factory_girl (= 4.5.0)
   factory_girl_rails (= 4.5.0)
   font-awesome-rails (= 4.2.0.0)
+  forgery (= 0.7.0)
   forkr (= 1.0.2)
   haml (~> 4.0.7)
   ibsciss-middleware!
@@ -469,4 +471,4 @@ DEPENDENCIES
   virtus (~> 1.0.5)
 
 BUNDLED WITH
-   1.16.2
+   1.16.6
