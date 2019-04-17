@@ -121,8 +121,17 @@ db["fs.files"].find({
 "$nin" => all_body_names
 }}).remove_all
 
+all_file_ids = Array.new
+fs_files = db["fs.files"]
+fs_files.find.each do |doc|
+  all_file_ids << doc['_id']
+end
 
-=begin
+db["fs.chunks"].find({
+"files_id" => {
+"$nin" => all_file_ids
+}}).remove_all
+
 pb = ProgressBar.create(
 :title => "Redacting...",
 :total => total_trans,
@@ -137,4 +146,3 @@ Protocols::X12::TransactionSetHeader.all.each do |tse|
   pb.increment
 end
 pb.finish
-=end
