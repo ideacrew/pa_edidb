@@ -20,7 +20,7 @@ class PersonScrubber
         new_dob_month = rand(1..12)
         break unless new_dob_month == dob_month
       end
-      member.dob = select_valid_dob(dob_day,dob_month,dob_year)
+      member.dob = select_valid_dob(dob_day,new_dob_month,dob_year)
       member.ssn = "#{rand(100..799)}00#{rand(1000..7000)}" #00 means fake SSN
       member.valid?
       puts member.errors.full_messages
