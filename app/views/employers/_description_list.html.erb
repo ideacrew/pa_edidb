@@ -8,10 +8,14 @@
       <dd><%= number_to_fein(@employer.fein) %></dd>
       <dt><%= model_class.human_attribute_name(:aasm_state) %></dt>
       <dd><%= @employer.aasm_state.humanize %></dd>
+      <% if @employer.sic_code.present? %>
       <dt><%= model_class.human_attribute_name(:sic_code) %></dt>
       <dd><%= @employer.sic_code %></dd>
+      <% end %>
+      <% if @employer.msp_count.present? %>
       <dt><%= model_class.human_attribute_name(:msp_count) %></dt>
       <dd><%= @employer.msp_count %></dd>
+      <% end %>
       <dt><%= model_class.human_attribute_name(:contact_name) %></dt>
       <dd><%= @employer.name_full %></dd>
 

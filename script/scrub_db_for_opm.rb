@@ -56,7 +56,7 @@ employers_to_keep = %w(
 118510
 100101
 100102
-)  
+)
 
 employer_cross_mapping = {
 "118510" => {
@@ -75,6 +75,8 @@ employer_cross_mapping = {
   :dba => nil
 }
 }
+
+mock_edi_payload_content = "-----REDACTED-----"
 
 employers = Employer.where(:hbx_id => {"$in" => employers_to_keep})
 
@@ -130,11 +132,11 @@ PremiumPayment.where({
   }
 }).delete_all
 
-remaining_premium_payment_ids = PremiumPayment.all.map(&:_id)
+remaining_premium_payment_transaction_ids = PremiumPayment.all.map(&:transaction_set_premium_payment_id)
 
 payment_transmissions_to_keep = Protocols::X12::TransactionSetHeader.where({
   :"_id"=> {
-    "$in" => remaining_premium_payment_ids
+    "$in" => remaining_premium_payment_transaction_ids
   },
   "_type" => "Protocols::X12::TransactionSetPremiumPayment"
 }).map(&:transmission_id)
@@ -210,7 +212,7 @@ Protocols::X12::TransactionSetHeader.all.each do |tse|
   if tse.body.present?
     body_path = tse.body.file.path
     tse.body.remove!
-    tse.update_attributes!(:body => FileString.new(body_path.gsub(/uploads\//, ""), "-----REDACTED-----"))
+    tse.update_attributes!(:body => FileString.new(body_path.gsub(/uploads\//, ""), mock_edi_payload_content))
   end
   pb.increment
 end

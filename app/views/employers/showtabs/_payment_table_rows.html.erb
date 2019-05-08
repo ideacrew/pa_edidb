@@ -1,7 +1,11 @@
 <td><%= p["carrier_name"] %></td>
 <td><%= number_to_currency  p["payment_amount"].to_i/100.0 %></td>
-<td width="250px">
+<td>
+  <% if p["transaction_set_premium_payment"].any? %>
+  <ul class="list-unstyled">
   <% p["transaction_set_premium_payment"].each do |t| %>
-    <%= link_to "View Details", edi_transaction_set_payment_path(t) %>,&nbsp;
-  <%end%>
+    <li><%= link_to "View Details", edi_transaction_set_payment_path(t) %></li>
+  <% end %>
+  </ul>
+  <% end %>
 </td>
