@@ -10,6 +10,7 @@ set :deploy_via, :copy
 
 
 set :user, "nginx"
+set :ssh_options, {:forward_agent => true}
 set :use_sudo, false
 set :default_shell, "bash -l"
 
