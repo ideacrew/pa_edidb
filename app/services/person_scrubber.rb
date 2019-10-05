@@ -13,14 +13,14 @@ class PersonScrubber
     person.name_last = Forgery('name').last_name
 
     person.members.each do |member|
-      new_dob_month = dob_month = member.dob.month
-      dob_day = member.dob.day
+      dob_month = member.dob.month
+      new_dob_day = dob_day = member.dob.day
       dob_year = member.dob.year
       loop do
-        new_dob_month = rand(1..12)
-        break unless new_dob_month == dob_month
+        new_dob_day = rand(1..12)
+        break unless new_dob_day == dob_day
       end
-      member.dob = select_valid_dob(dob_day,new_dob_month,dob_year)
+      member.dob = select_valid_dob(new_dob_day,dob_month,dob_year)
       member.ssn = "#{rand(100..799)}00#{rand(1000..7000)}" #00 means fake SSN
       member.valid?
       puts member.errors.full_messages
