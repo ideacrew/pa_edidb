@@ -58,6 +58,9 @@
   </div>
 </div>
 <% if @edi_transaction_set.policy && @edi_transaction_set.policy.subscriber %>
+  <% if @edi_transaction_set.respond_to?(:transmission_id) %>
+    <%= link_to "EDI Transmission", edi_transmission_path(@edi_transaction_set.transmission_id), {class: 'btn btn-info btn-sm'} %>
+  <% end %>
   <%= link_to "Individual", person_path(@edi_transaction_set.policy.subscriber.person), {class: 'btn btn-info btn-sm'}  %>
   <%= link_to(t('.back', :default => t("helpers.links.back")), person_path(@edi_transaction_set.policy.subscriber.person), {:class => 'btn btn-primary btn-sm'})  %>
   <p class="text-right"><small><%= "updated: #{@edi_transaction_set.updated_at.strftime('%m-%d-%Y') if @edi_transaction_set.updated_at.present?}" %></small></p>
