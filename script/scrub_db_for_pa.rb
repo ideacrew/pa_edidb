@@ -1,7 +1,7 @@
 altered_carriers = {
   "116184" => "Independence",
-  "116181" => "PA Health Wellness",
-  "116182" => "Geisinger Health Plan",
+  "117625" => "PA Health Wellness",
+  "117628" => "Geisinger Health Plan",
   "116036" => "UPMC Health Plan",
   "116163" => "Oscar",
   "116034" => "Highmark", 
