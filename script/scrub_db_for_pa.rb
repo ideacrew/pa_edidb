@@ -1,3 +1,25 @@
+altered_carriers = {
+  "116184" => "Independence",
+  "116181" => "PA Health Wellness",
+  "116182" => "Geisinger Health Plan",
+  "116036" => "UPMC Health Plan",
+  "116163" => "Oscar",
+  "116034" => "Highmark", 
+  "116028"  => "Keystone"
+}
+
+altered_carriers.each_pair do |k, v|
+  carrier = Carrier.where(hbx_carrier_id: k).first
+  carrier.update_attributes!(name: v)
+  tp_profile_feins = carrier.carrier_profiles.map(&:fein)
+  tps = TradingPartner.where(
+    "trading_profiles.profile_code" => {"$in" => tp_profile_feins}
+  )
+  tps.each do |tp|
+    tp.update_attributes!(name: v)
+  end
+end
+
 member_ids_to_keep = %w(
 1381456
 1883265
